@@ -16,18 +16,35 @@ import java.util.List;
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_customer")
     private int idCustomer;
     private String lastname;
     private String firstname;
     private int age;
     private String phone;
 
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
-    private List<Ticket> tickets;
-
-
-    @Embedded
+    @OneToOne
+    @JoinColumn(name = "id_address")
     private Address address;
+
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "idCustomer=" + idCustomer +
+                ", lastname='" + lastname + '\'' +
+                ", firstname='" + firstname + '\'' +
+                ", age=" + age +
+                ", phone='" + phone + '\'' +
+                ", address=" + address +
+                '}';
+    }
+
+    //@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+   // private List<Ticket> tickets;
+
+
+    //@Embedded
+    //private Address address;
 
 
 }

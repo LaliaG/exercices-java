@@ -18,30 +18,38 @@ import java.util.List;
 public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column (name = "id_event")
     private int idEvent;
     private String name;
     private LocalDate date;
     private LocalTime hour;
+
+    @OneToOne
+    @JoinColumn(name = "id_location")
+    private Location location;
+
+   // @Embedded
+    //private Location location; 2e façon d'écrire
+    //@OneToOne(cascade = CascadeType.ALL) 3e façon d'écrire
+
     private int nbOfSeats;
 
-    @Embedded
-    private Location location;
-    //@OneToOne(cascade = CascadeType.ALL) 2e façon d'écrire
-    //    @OneToOne
-//    @JoinColumn(name="id_pot")
-//    private Pot pot; 3e fçacon d'écrire le @Embedded
-
-    @ManyToMany(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
-    @JoinTable(name = "event_customer",joinColumns = @JoinColumn(name = "idAccount"),
-            inverseJoinColumns = @JoinColumn(name = "idCustomer"))
-    private List<Customer> customers;
-
-    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "event")
     private List<Ticket> tickets;
 
-    //@OneToMany
-   // @JoinColumn(name = "idTicket")
-   // private List<Ticket> tickets; 2 FACON D4ECRIRE LE ONETOMANY
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 }
