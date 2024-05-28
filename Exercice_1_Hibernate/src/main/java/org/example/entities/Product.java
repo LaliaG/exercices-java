@@ -24,6 +24,7 @@ public class Product {
     @Column(name = "brand")
     private String brand;
     private String reference;
+    @Temporal(TemporalType.DATE)
     private Date datePurchase;
     private double price;
     private int stock;
