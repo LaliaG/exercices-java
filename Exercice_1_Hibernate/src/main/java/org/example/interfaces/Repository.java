@@ -18,5 +18,13 @@ public interface Repository<T> {
     List<T> findByDateAchatBetween(Date startDate, Date endDate);
 
     List<T> findByStockLessThan(int stock);
+
+    int calculateStockValueByMarque(String marque);
+
+    double calculateAveragePrix();
+
+    List<T> findByMarque(String marque);
+
+    boolean deleteByMarque(String marque);
 }
 

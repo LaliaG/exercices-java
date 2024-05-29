@@ -2,6 +2,7 @@ package org.example.entities;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Produit {
@@ -20,6 +21,12 @@ public class Produit {
 
     @Temporal(TemporalType.DATE)
     private Date dateAchat;
+
+    @OneToMany(mappedBy = "produit", cascade = CascadeType.ALL)
+    private List<Image> images;
+
+    @OneToMany(mappedBy = "produit", cascade = CascadeType.ALL)
+    private List<Commentaire> commentaires;
 
     public Produit() {
     }
@@ -89,6 +96,8 @@ public class Produit {
                 ", prix=" + prix +
                 ", stock=" + stock +
                 ", dateAchat=" + dateAchat +
+                ", images=" + images +
+                ", commentaires=" + commentaires +
                 '}';
     }
 }

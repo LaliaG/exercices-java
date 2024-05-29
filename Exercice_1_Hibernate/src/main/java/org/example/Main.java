@@ -1,5 +1,7 @@
 package org.example;
 
+import org.example.entities.Commentaire;
+import org.example.entities.Image;
 import org.example.entities.Produit;
 import org.example.service.ProduitService;
 
@@ -28,7 +30,7 @@ public class Main {
         System.out.println(p);
 
         // Supprimer le produit dont id = 3
-        ps.delete(ps.findById(3));
+       // ps.delete(ps.findById(3));
 
         // Modifier les informations du produit dont id = 1
         Produit p1 = ps.findById(1);
@@ -80,6 +82,41 @@ public class Main {
         for (Produit produit : produitsStockInferieur) {
             System.out.println("Numéro: " + produit.getId() + ", Référence: " + produit.getReference());
         }
+
+        // Afficher la valeur du stock des produits d'une marque choisie
+        int valeurStockApple = ps.calculateStockValueByMarque("Apple");
+        System.out.println("Valeur du stock des produits Apple: " + valeurStockApple);
+
+        // Calculer le prix moyen des produits
+        double prixMoyen = ps.calculateAveragePrix();
+        System.out.println("Prix moyen des produits: " + prixMoyen);
+
+        // Récupérer la liste des produits d'une marque choisie
+        List<Produit> produitsApple = ps.findByMarque("Apple");
+        produitsApple.forEach(System.out::println);
+
+        // Supprimer les produits d'une marque choisie de la table produit
+        boolean deleted = ps.deleteByMarque("Nokia");
+        System.out.println("Produits Nokia supprimés: " + deleted);
+
+        // Ajouter une image à un produit
+        Produit produitApple = ps.findById(1);
+        if (produitApple != null) {
+            Image image1 = new Image("http://example.com/image1.jpg", produitApple);
+            ps.addImageToProduit(produitApple.getId(), image1);
+        }
+
+        // Ajouter un commentaire à un produit
+        if (produitApple != null) {
+            Commentaire commentaire1 = new Commentaire("Super produit!", new Date(), 5, produitApple);
+            ps.addCommentaireToProduit(produitApple.getId(), commentaire1);
+        }
+
+        // Afficher la liste des produits avec une note de 4 ou plus
+        List<Produit> produitsWithGoodNotes = ps.findProduitsWithNoteGreaterOrEqualThan(4);
+        produitsWithGoodNotes.forEach(System.out::println);
+
+
 
         ps.close();
         scanner.close();
