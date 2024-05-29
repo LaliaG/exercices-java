@@ -22,11 +22,14 @@ public class Produit {
     @Temporal(TemporalType.DATE)
     private Date dateAchat;
 
-    @OneToMany(mappedBy = "produit", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "produit", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Image> images;
 
-    @OneToMany(mappedBy = "produit", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "produit", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Commentaire> commentaires;
+
+    @ManyToMany(mappedBy = "produits")
+    private List<Commande> commandes;
 
     public Produit() {
     }
@@ -87,6 +90,30 @@ public class Produit {
         this.dateAchat = dateAchat;
     }
 
+    public List<Image> getImages() {
+        return images;
+    }
+
+    public void setImages(List<Image> images) {
+        this.images = images;
+    }
+
+    public List<Commentaire> getCommentaires() {
+        return commentaires;
+    }
+
+    public void setCommentaires(List<Commentaire> commentaires) {
+        this.commentaires = commentaires;
+    }
+
+    public List<Commande> getCommandes() {
+        return commandes;
+    }
+
+    public void setCommandes(List<Commande> commandes) {
+        this.commandes = commandes;
+    }
+
     @Override
     public String toString() {
         return "Produit{" +
@@ -98,6 +125,7 @@ public class Produit {
                 ", dateAchat=" + dateAchat +
                 ", images=" + images +
                 ", commentaires=" + commentaires +
+                ", commandes=" + commandes +
                 '}';
     }
 }

@@ -27,7 +27,7 @@ public class Main {
 
         // Afficher les informations du produit dont id = 2
         Produit p = ps.findById(2);
-        System.out.println(p);
+       // System.out.println(p);
 
         // Supprimer le produit dont id = 3
        // ps.delete(ps.findById(3));
@@ -43,7 +43,7 @@ public class Main {
         // 1. Afficher la totalité des produits
         List<Produit> produits = ps.findAll();
         for (Produit produit : produits) {
-            System.out.println(produit);
+        //    System.out.println(produit);
         }
 
         // 2. Afficher la liste des produits dont le prix est supérieur à 100 euros
@@ -103,17 +103,17 @@ public class Main {
         Produit produitApple = ps.findById(1);
         if (produitApple != null) {
             Image image1 = new Image("http://example.com/image1.jpg", produitApple);
-            ps.addImageToProduit(produitApple.getId(), image1);
+            ps.addNewImage(image1, produitApple.getId());
         }
 
         // Ajouter un commentaire à un produit
         if (produitApple != null) {
             Commentaire commentaire1 = new Commentaire("Super produit!", new Date(), 5, produitApple);
-            ps.addCommentaireToProduit(produitApple.getId(), commentaire1);
+            ps.addNewCommentaire(commentaire1, produitApple.getId());
         }
 
         // Afficher la liste des produits avec une note de 4 ou plus
-        List<Produit> produitsWithGoodNotes = ps.findProduitsWithNoteGreaterOrEqualThan(4);
+        List<Produit> produitsWithGoodNotes = ps.getProduitsParNoteMin(4);
         produitsWithGoodNotes.forEach(System.out::println);
 
 
