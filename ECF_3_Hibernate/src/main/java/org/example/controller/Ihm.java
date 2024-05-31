@@ -1,9 +1,15 @@
 package org.example.controller;
 
+import org.example.entities.Sale;
+import org.example.enums.Category;
+import org.example.enums.SaleStatus;
+import org.example.enums.Size;
 import org.example.service.CustomerService;
 import org.example.service.ItemService;
+import org.example.service.ReportService;
 import org.example.service.SaleService;
 
+import java.util.Date;
 import java.util.Scanner;
 
 public class Ihm {
@@ -11,7 +17,6 @@ public class Ihm {
     private ItemService itemService;
     private SaleService saleService;
     private Scanner scanner;
-    private SaleService sessionFactory;
 
     public Ihm(){
         scanner = new Scanner(System.in);
@@ -19,7 +24,13 @@ public class Ihm {
         itemService = new ItemService();
         saleService = new SaleService();
     }
-    
+
+    public Ihm(ItemService itemService, SaleService saleService) {
+    }
+
+    public Ihm(ItemService itemService, SaleService saleService, CustomerService customerService, SaleService saleService1) {
+    }
+
     public void start() {
         while (true) {
             System.out.println("1. Gestion des clients");
@@ -43,7 +54,6 @@ public class Ihm {
                     saleIhm.main(null);
                     break;
                 case 4:
-                    sessionFactory.close();
                     System.out.println("Au revoir!");
                     scanner.close();
                     System.exit(0);
@@ -52,7 +62,5 @@ public class Ihm {
                     System.out.println("Option invalide. Veuillez réessayer.");
             }
         }
-
-
     }
 }
