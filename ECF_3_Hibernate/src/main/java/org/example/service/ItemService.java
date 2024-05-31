@@ -4,18 +4,19 @@ import org.example.entities.Item;
 import org.example.enums.Category;
 import org.example.enums.Size;
 import org.example.interfaces.Repository;
+import org.hibernate.Session;
 import org.hibernate.query.Query;
 
 import java.util.List;
 
-public class ItemService extends BaseService<Item> implements Repository<Item> {
+public class ItemService extends BaseService implements Repository<Item> {
     public ItemService() {
         super();
     }
 
     @Override
     public boolean create(Item item) {
-        session = sessionFactory.openSession();
+        Session session = sessionFactory.openSession();
         session.beginTransaction();
         session.save(item);
         session.getTransaction().commit();
@@ -25,7 +26,7 @@ public class ItemService extends BaseService<Item> implements Repository<Item> {
 
     @Override
     public boolean update(Item item) {
-        session = sessionFactory.openSession();
+        Session session = sessionFactory.openSession();
         session.beginTransaction();
         session.update(item);
         session.getTransaction().commit();
@@ -35,7 +36,7 @@ public class ItemService extends BaseService<Item> implements Repository<Item> {
 
     @Override
     public boolean delete(Item item) {
-        session = sessionFactory.openSession();
+        Session session = sessionFactory.openSession();
         session.beginTransaction();
         session.delete(item);
         session.getTransaction().commit();
@@ -45,7 +46,7 @@ public class ItemService extends BaseService<Item> implements Repository<Item> {
 
     @Override
     public Item findById(int id) {
-        session = sessionFactory.openSession();
+        Session session = sessionFactory.openSession();
         Item item = session.get(Item.class, id);
         session.close();
         return item;
@@ -53,8 +54,8 @@ public class ItemService extends BaseService<Item> implements Repository<Item> {
 
     @Override
     public List<Item> findAll() {
-        session = sessionFactory.openSession();
-        Query<Item> query = session.createQuery("from Item");
+        Session session = sessionFactory.openSession();
+        Query<Item> query = session.createQuery("from Item", Item.class);
         List<Item> itemList = query.list();
         session.close();
         return itemList;
@@ -62,8 +63,8 @@ public class ItemService extends BaseService<Item> implements Repository<Item> {
 
     // Méthode pour filtrer les articles par catégorie
     public List<Item> filterByCategory(Category category) {
-        session = sessionFactory.openSession();
-        Query<Item> query = session.createQuery("from Item where category = :category");
+        Session session = sessionFactory.openSession();
+        Query<Item> query = session.createQuery("from Item where category = :category", Item.class);
         query.setParameter("category", category);
         List<Item> itemList = query.list();
         session.close();
@@ -72,11 +73,18 @@ public class ItemService extends BaseService<Item> implements Repository<Item> {
 
     // Méthode pour filtrer les articles par taille
     public List<Item> filterBySize(Size size) {
-        session = sessionFactory.openSession();
-        Query<Item> query = session.createQuery("from Item where size = :size");
+        Session session = sessionFactory.openSession();
+        Query<Item> query = session.createQuery("from Item where size =  :size", Item.class);
         query.setParameter("size", size);
         List<Item> itemList = query.list();
         session.close();
         return itemList;
     }
+
+    public void close() {
+    }
+
+    public void create(String pantalon, Category category, Size size, double v, int i) {
+    }
 }
+

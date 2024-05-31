@@ -41,6 +41,12 @@ public class Sale {
     )
     private List<Item> items;
 
+    public Sale(Date date, SaleStatus saleStatus, Customer byId) {
+    }
+
+    public Sale(int id, Date date, int i, int i1, int i2) {
+    }
+
     @Override
     public String toString() {
         return "Sale{" +
@@ -50,5 +56,19 @@ public class Sale {
                 ", customer=" + customer +
                 ", items=" + items +
                 '}';
+    }
+
+    public void addItem(Item byId) {
+    }
+
+    public void setQuantity(int i) {
+    }
+
+    public double getTotalAmount() {
+        return 0;
+    }
+
+    public char[] getSaleDate() {
+        return new char[0];
     }
 }

@@ -1,21 +1,19 @@
 package org.example.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.example.enums.Category;
 import org.example.enums.Size;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.regex.PatternSyntaxException;
 
 @Entity
 @Table(name = "Item")
 @Data
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,6 +22,8 @@ public class Item {
     @Column(name = "description")
     private String description;
 
+    @Getter
+    @Setter
     @Enumerated(EnumType.STRING)
     @Column(name = "category")
     private Category category;
@@ -32,6 +32,8 @@ public class Item {
     @Column(name = "size")
     private Size size;
 
+    @Setter
+    @Getter
     @Column(name = "price")
     private double price;
 
@@ -40,6 +42,9 @@ public class Item {
 
     @ManyToMany(mappedBy = "items")
     private List<Sale> sales;
+
+    public Item(int i, String s, double v, int i1) {
+    }
 
     @Override
     public String toString() {
@@ -53,4 +58,12 @@ public class Item {
                 ", sales=" + sales +
                 '}';
     }
+
+
+   // public String getName() {
+   //     return items;
+   // }
+
+   // public void setName(String s) {
+  //  }
 }

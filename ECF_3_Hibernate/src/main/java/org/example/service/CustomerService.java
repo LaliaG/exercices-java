@@ -1,19 +1,21 @@
 package org.example.service;
 
 import org.example.entities.Customer;
+import org.example.entities.Sale;
 import org.example.interfaces.Repository;
+import org.hibernate.Session;
 import org.hibernate.query.Query;
 
 import java.util.List;
 
-public class CustomerService extends BaseService<Customer> implements Repository<Customer> {
+public class CustomerService extends BaseService implements Repository<Customer> {
     public CustomerService() {
         super();
     }
 
     @Override
     public boolean create(Customer customer) {
-        session = sessionFactory.openSession();
+        Session session = sessionFactory.openSession();
         session.beginTransaction();
         session.save(customer);
         session.getTransaction().commit();
@@ -23,7 +25,7 @@ public class CustomerService extends BaseService<Customer> implements Repository
 
     @Override
     public boolean update(Customer customer) {
-        session = sessionFactory.openSession();
+        Session session = sessionFactory.openSession();
         session.beginTransaction();
         session.update(customer);
         session.getTransaction().commit();
@@ -33,7 +35,7 @@ public class CustomerService extends BaseService<Customer> implements Repository
 
     @Override
     public boolean delete(Customer customer) {
-        session = sessionFactory.openSession();
+        Session session = sessionFactory.openSession();
         session.beginTransaction();
         session.delete(customer);
         session.getTransaction().commit();
@@ -43,7 +45,7 @@ public class CustomerService extends BaseService<Customer> implements Repository
 
     @Override
     public Customer findById(int id) {
-        session = sessionFactory.openSession();
+        Session session = sessionFactory.openSession();
         Customer customer = session.get(Customer.class, id);
         session.close();
         return customer;
@@ -51,17 +53,26 @@ public class CustomerService extends BaseService<Customer> implements Repository
 
     @Override
     public List<Customer> findAll() {
-        session = sessionFactory.openSession();
-        Query<Customer> query = session.createQuery("from Customer");
-        List<Customer> customerList = query.list();
+        Session session = sessionFactory.openSession();
+        Query<Customer> query = session.createQuery("from Customer", Customer.class);
+        List<Customer> customers = query.list();
         session.close();
-        return customerList;
+        return customers;
+    }
+
+    // Méthode pour récupérer l'historique des achats d'un client
+    public List<Sale> getPurchaseHistory(int customerId) {
+        Customer customer = findById(customerId);
+        if (customer != null) {
+            return customer.getPurchaseHistory();
+        }
+        return null;
     }
 
     // Méthode pour rechercher les clients par nom
     public List<Customer> findByName(String name) {
-        session = sessionFactory.openSession();
-        Query<Customer> query = session.createQuery("from Customer where name = :name");
+        Session session = sessionFactory.openSession();
+        Query<Customer> query = session.createQuery("from Customer where name = :name", Customer.class);
         query.setParameter("name", name);
         List<Customer> customerList = query.list();
         session.close();
@@ -70,12 +81,17 @@ public class CustomerService extends BaseService<Customer> implements Repository
 
     // Méthode pour rechercher les clients par adresse e-mail
     public Customer findByEmail(String email) {
-        session = sessionFactory.openSession();
-        Query<Customer> query = session.createQuery("from Customer where email = :email");
+        Session session = sessionFactory.openSession();
+        Query<Customer> query = session.createQuery("from Customer where email = :email", Customer.class);
         query.setParameter("email", email);
         Customer customer = query.uniqueResult();
         session.close();
         return customer;
     }
 
+    public void close() {
+    }
+
+    public void create(String bob, String mail) {
+    }
 }

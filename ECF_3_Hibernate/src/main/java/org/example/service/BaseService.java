@@ -6,7 +6,7 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
-public class BaseService {
+public abstract class BaseService {
     protected
 
     StandardServiceRegistry registre;
@@ -17,6 +17,6 @@ public class BaseService {
 
     public BaseService(){
         registre = new StandardServiceRegistryBuilder().configure().build();
-        sessionFactory = new MetadataSources(registre).buildMetadata().buildSessionFactory();
+        this.sessionFactory = new MetadataSources(registre).buildMetadata().buildSessionFactory();
     }
 }
