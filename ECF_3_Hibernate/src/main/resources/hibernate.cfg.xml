@@ -6,6 +6,6 @@
     <session-factory>
         <mapping class="org.example.entities.Item" />
         <mapping class="org.example.entities.Sale" />
-        <mapping class="org.example.entities.Customer" />
+        <mapping class="org.example.entities.Customer"/>
     </session-factory>
 </hibernate-configuration>

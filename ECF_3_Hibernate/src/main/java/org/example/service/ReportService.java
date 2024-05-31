@@ -1,16 +1,22 @@
 package org.example.service;
-
 import org.example.entities.Item;
 import org.example.entities.Sale;
 import org.example.enums.Category;
+import org.hibernate.SessionFactory;
 
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.regex.PatternSyntaxException;
 import java.util.stream.Collectors;
 
-public class ReportService extends BaseService {
+public class ReportService {
+    private SessionFactory sessionFactory;
+
+    public ReportService(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
     private SaleService saleService;
     private ItemService itemService;
 
@@ -67,10 +73,11 @@ public class ReportService extends BaseService {
 
     // 4. Générer le rapport des stocks disponibles
     public void generateStockReport() {
-        List<Item> products = itemService.findAll();
+        List<Item> items = itemService.findAll();
         System.out.println("Stock Report:");
-        products.forEach(product ->
-                System.out.println("Product: " + product.getDescription() + ", Stock: " + product.getStockQuantity()));
+
+        items.forEach(item ->
+                System.out.println("Item: " + item.getDescription() + ", Stock: " + item.getStockQuantity()));
     }
 
     // 5. Générer le rapport des performances des produits
@@ -89,3 +96,4 @@ public class ReportService extends BaseService {
     }
 
 }
+

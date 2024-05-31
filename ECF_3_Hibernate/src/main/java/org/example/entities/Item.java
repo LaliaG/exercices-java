@@ -46,6 +46,9 @@ public class Item {
     public Item(int i, String s, double v, int i1) {
     }
 
+    public Item(int id, String description, Category catégorie, Size taille, double prix, int quantitéStock) {
+    }
+
     @Override
     public String toString() {
         return "Item{" +
