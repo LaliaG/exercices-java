@@ -15,6 +15,7 @@ public class ShopTest {
     private Shop shop;
 
     @BeforeEach
+
     public void setUp() {
         products = new ArrayList<>();
         shop = new Shop(products);
