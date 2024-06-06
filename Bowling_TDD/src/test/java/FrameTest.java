@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -17,6 +18,7 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class FrameTest {
+    @Mock
     //private Roll roll;
     private Frame simpleFrame;
     private Frame lastFrame;
@@ -52,7 +54,7 @@ public class FrameTest {
         assertFalse(canRollAgain);*/
         // Arrange
         IGenerateur generateurMock = mock(IGenerateur.class);
-        when(generateurMock.randomPin(10)).thenReturn(5); // Suppose que le lancer abat 5 quilles
+        Mockito.when(generateurMock.randomPin(10)).thenReturn(5); // Suppose que le lancer abat 5 quilles
         Frame frame = new Frame(generateurMock, false);
 
         // Act

@@ -20,7 +20,7 @@ public class Frame {
         this.score = 0;
     }
 
-    public int getScore (){
+    public int getScore() {
        /*
       int scoreFirst = generateur.randomPin(lastFrame);
       int scoreSecond = generateur.randomPin(lastFrame);
@@ -61,52 +61,362 @@ public class Frame {
     }
 
     private void addScore(int pins) {
-        score =+ pins;
+        score = +pins;
     }
 
     public boolean makeRoll() {
-        // Si ce n'est pas la dernière frame et qu'il y a déjà 2 lancers, retourner false
-        if (!lastFrame && rolls.size() == 2) {
-            return false;
-        }
-        // Si ce n'est pas la dernière frame, et qu'il y a un strike au premier lancer, retourner false
-        if (!lastFrame && rolls.size() == 1 && rolls.get(0).getPins() == 10) {
-            return false;
-        }
-        // Si c'est la dernière frame et qu'il y a déjà 3 lancers, retourner false
-        if (lastFrame && rolls.size() == 3) {
+        if (!lastFrame && rolls.size() >= 2) {
             return false;
         }
 
         int maxPins = 10;
-        // Si ce n'est pas le premier lancer et qu'il n'y a pas de strike, calculer le nombre maximum de quilles à abattre
         if (!rolls.isEmpty() && rolls.get(0).getPins() != 10) {
             maxPins -= rolls.get(0).getPins();
         }
 
-        // Générer un nombre aléatoire de quilles abattues
+        if (lastFrame && rolls.size() == 2 && !isSpareOrStrike()) {
+            return false;
+        }
+
         int pins = generateur.randomPin(maxPins);
-        // Ajouter le lancer à la liste des lancers
         rolls.add(new Roll(pins));
-        // Ajouter au score
         addScore(pins);
 
-        // Si ce n'est pas la dernière frame et qu'il y a maintenant 2 lancers, retourner false
-        if (!lastFrame && rolls.size() == 2) {
-            return false;
-        }
-        // Si c'est la dernière frame et qu'il y a maintenant 3 lancers, retourner false
-        if (lastFrame && rolls.size() == 3) {
-            return false;
-        }
-        // Si c'est la dernière frame et qu'il y a maintenant 2 lancers,mais pas de spare ou de strike, retourner false
-        if (lastFrame && rolls.size() == 2 && (rolls.get(0).getPins() + rolls.get(1).getPins() < 10)) {
-            return false;
-        }
-
-        return true; // Retourner true si un autre lancer est permis
+        return true;
     }
 
+    private boolean isSpareOrStrike() {
+        if (rolls.size() == 2 && rolls.get(0).getPins() + rolls.get(1).getPins() >= 10) {
+            return true;
+        }
+        return rolls.size() == 3 && (rolls.get(0).getPins() == 10 || rolls.get(0).getPins() + rolls.get(1).getPins() >= 10);
+    }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
