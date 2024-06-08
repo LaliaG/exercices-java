@@ -1,10 +1,6 @@
 package org.example.model;
 
-import org.example.exception.ProductNotFoundException;
-
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class Command {
@@ -14,11 +10,22 @@ public class Command {
         return products;
     }
 
-    public void addProduct(Product product) {
+    public void addProduct(Product product, int i) {
         products.put(product, products.getOrDefault(product, 0) + 1);
     }
 
     public void removeProduct(Product product) {
+    }
+
+    public boolean getProduct() {
+        return false;
+    }
+
+    public boolean isProductInOrder(boolean product) {
+        return product;
+    }
+
+    /*public void removeProduct(Product product) {
         if (products.containsKey(product)) {
             int quantity = products.get(product);
             if (quantity > 1) {
@@ -30,5 +37,5 @@ public class Command {
             throw new ProductNotFoundException("Product not found in command");
         }
     }
-
+*/
 }

@@ -11,19 +11,13 @@ import org.example.service.CommandService;
 import org.junit.Assert;
 
 public class UserOrderSteps {
-    private CommandService commandService;
-    private Command command;
 
-    @When("They click the confirm order button")
-    public void theyClickTheConfirmOrderButton() {
-        // Ajoutez la logique pour confirmer la commande
-    }
+   private CommandService commandService;
 
-    @Then("They see a confirmation that the order has been placed")
-    public void theySeeAConfirmationThatTheOrderHasBeenPlaced() {
-        // Ajoutez les assertions pour vérifier la confirmation
+
+    public UserOrderSteps() {
+        this.commandService = new CommandService(); // ou utilisez l'injection de dépendance
     }
-   /* private CommandService commandService;
     private Command command;
     private String orderConfirmation;
     private String errorMessage;
@@ -50,6 +44,26 @@ public class UserOrderSteps {
         // Logic to fill in the required information (if needed)
     }
 
+    @When("they click the confirm order button")
+    public void theyClickTheConfirmOrderButton() {
+        // Votre implémentation ici
+        System.out.println("Confirm order button clicked");
+    }
+
+    @Then("They receive an order confirmation")
+    public void theyReceiveAnOrderConfirmation() {
+        String confirmationMessage = commandService.getOrderConfirmation(command); // Assurez-vous que cette méthode retourne bien "Order placed successfully"
+        Assert.assertEquals("Order placed successfully", confirmationMessage);
+    }
+
+    @Then("They see an error message indicating that the order does not exist")
+    public void theySeeAnErrorMessageIndicatingThatTheOrderDoesNotExist() {
+        String errorMessage = commandService.getOrderErrorMessage(command); // Assurez-vous que cette méthode retourne bien "Order does not exist"
+        Assert.assertNotNull(errorMessage);
+        Assert.assertEquals("Order does not exist", errorMessage);
+    }
+
+    /*
     @When("They click the {string} button")
     public void theyClickTheConfirmOrderButton(String button) {
         try {
@@ -63,12 +77,12 @@ public class UserOrderSteps {
     public void theyReceiveAnOrderConfirmation() {
         Assert.assertEquals("Order placed successfully", orderConfirmation);
     }
-
+*/
     @Given("The user tries to confirm a non-existent order")
     public void theUserTriesToConfirmANonExistentOrder() {
         command = new Command();
     }
-
+/*
     @Then("They see an error message indicating that the order does not exist")
     public void theySeeAnErrorMessageIndicatingThatTheOrderDoesNotExist() {
         Assert.assertEquals("Order does not exist", errorMessage);

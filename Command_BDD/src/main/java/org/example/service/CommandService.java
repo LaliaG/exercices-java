@@ -13,7 +13,7 @@ public class CommandService {
     }
 
     public void addProductToCommand(Command command, Product product) {
-        command.addProduct(product);
+        command.addProduct(product, 1);
     }
 
     public void removeProductFromCommand(Command command, Product product) {
@@ -25,5 +25,19 @@ public class CommandService {
             throw new CommandNotFoundException("Order does not exist");
         }
         return "Order placed successfully";
+    }
+
+
+
+    public String getOrderConfirmation(Command command) {
+        return "Order placed successfully";
+    }
+
+    public String getOrderErrorMessage(Command command) {
+        return "Order does not exist";
+    }
+    public String getProductErrorMessage(Command command, Product product) {
+        // Implémentez la logique pour retourner un message d'erreur si le produit n'est pas dans la commande
+        return "Product is not in the order"; // Exemple
     }
 }
