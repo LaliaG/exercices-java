@@ -61,8 +61,8 @@ public class UserOrderSteps {
     public void theySeeAnErrorMessageIndicatingThatTheOrderDoesNotExist() {
         Command command = getNonExistentOrder(); // Supposons que cela obtient la commande inexistante
         String errorMessage = commandService.getOrderErrorMessage(command);
-        Assertions.assertNotNull(errorMessage, "Le message d'erreur ne doit pas être null");
-        Assertions.assertEquals("La commande n'existe pas", errorMessage);
+        Assertions.assertNotNull(errorMessage, "Error message should not be null");
+        Assertions.assertEquals("Order does not exist", errorMessage);
     }
 
     private Command getNonExistentOrder() {
