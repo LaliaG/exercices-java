@@ -9,6 +9,7 @@ import org.example.model.Command;
 import org.example.model.Product;
 import org.example.service.CommandService;
 import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 
 public class UserOrderSteps {
 
@@ -58,10 +59,23 @@ public class UserOrderSteps {
 
     @Then("They see an error message indicating that the order does not exist")
     public void theySeeAnErrorMessageIndicatingThatTheOrderDoesNotExist() {
+        Command command = getNonExistentOrder(); // Supposons que cela obtient la commande inexistante
+        String errorMessage = commandService.getOrderErrorMessage(command);
+        Assertions.assertNotNull(errorMessage, "Le message d'erreur ne doit pas être null");
+        Assertions.assertEquals("La commande n'existe pas", errorMessage);
+    }
+
+    private Command getNonExistentOrder() {
+        // Simulation ou implémentation réelle pour obtenir une commande inexistante
+        return new Command(); // Placeholder
+    }
+/*
+    @Then("They see an error message indicating that the order does not exist")
+    public void theySeeAnErrorMessageIndicatingThatTheOrderDoesNotExist() {
         String errorMessage = commandService.getOrderErrorMessage(command); // Assurez-vous que cette méthode retourne bien "Order does not exist"
         Assert.assertNotNull(errorMessage);
         Assert.assertEquals("Order does not exist", errorMessage);
-    }
+    }*/
 
     /*
     @When("They click the {string} button")

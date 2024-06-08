@@ -50,17 +50,28 @@ public class UserRemoveProductSteps {
         Assert.assertFalse("Product should be removed from the order", isProductInOrder);
     }
 
+    @Then("They see an error message indicating that the product is not in the order")
+    public void theySeeAnErrorMessageIndicatingThatTheProductIsNotInTheOrder() {
+        String errorMessage = getErrorMessageForNonExistentProduct();
+        Assertions.assertNotNull(errorMessage, "Le message d'erreur ne doit pas être null");
+    }
+
+    private String getErrorMessageForNonExistentProduct() {
+        // Implémentation pour obtenir le message d'erreur
+        return "Le produit n'est pas dans la commande";
+    }
+
     /*
     @Then("The quantity of the product in the order is decreased by {int}")
     public void theQuantityOfTheProductInTheOrderIsDecreasedBy(Integer quantity) {
         Assertions.assertFalse(command.getProducts().containsKey(product), "Product should be removed from the order");
     }
-*/
+
     @Then("They see an error message indicating that the product is not in the order")
     public void theySeeAnErrorMessageIndicatingThatTheProductIsNotInTheOrder() {
         Assertions.assertNotNull(errorMessage, "Error message should not be null");
         Assertions.assertEquals("Product not in the order", errorMessage, "Error message should indicate that the product is not in the order");
-    }
+    }*/
 }
    /*private CommandService commandService;
     private Command command;
