@@ -1,26 +1,39 @@
 package org.example.exercice5_jee.model;
 
+import jakarta.persistence.*;
+
 import java.time.LocalDate;
 
-public class DogModel {
+@Entity
+//@Table(name = "dog")
+public class Dog {
+
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
     private String breed;
+    @Temporal(TemporalType.DATE)
     private LocalDate birthDate;
 
-    public DogModel(Long id, String name, String breed, LocalDate birthDate) {
-        this.id = id;
+    public Dog(String name, String breed, LocalDate birthDate) {
+        //this.id = id; Pas besoin pour le constructeur
         this.name = name;
         this.breed = breed;
         this.birthDate = birthDate;
     }
 
-    public Long getId() {
-        return id;
+    public Dog() {
+
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public String getName() {
@@ -49,7 +62,7 @@ public class DogModel {
 
     @Override
     public String toString() {
-        return "DogModel{" +
+        return "Dog{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", breed='" + breed + '\'' +

@@ -33,7 +33,8 @@
                     <input type="date" class="form-control" name="birthDate" id="birthDate" required>
                 </div>
                 <div class="text-center">
-                    <button type="submit" class="btn btn-primary">Add dog</button>
+                    <button type="submit" class="btn btn-primary">Add dog
+                    </button>
                 </div>
             </form>
         </div>
