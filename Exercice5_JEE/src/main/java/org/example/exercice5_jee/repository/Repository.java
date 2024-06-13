@@ -18,7 +18,7 @@ public abstract class Repository<T> {
         _session.update(o);
     }
 
-    public void delate(T o){
+    public void delete(T o){
         _session.delete(o);
     }
 

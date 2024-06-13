@@ -11,12 +11,12 @@ public class DogRepository extends Repository<Dog>{
     }
 
     @Override
-    Dog findById(int id) {
+    public Dog findById(int id) {
         return (Dog) _session.get(Dog.class,id);
     }
 
     @Override
-    List<Dog> findAll() {
+    public List<Dog> findAll() {
         return _session.createQuery("from Dog ").list();
     }
 }
