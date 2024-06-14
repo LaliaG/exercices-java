@@ -1,6 +1,7 @@
 package org.example.exercice6.service;
 
 import org.example.exercice6.repository.ProductRepository;
+import org.hibernate.query.Query;
 
 public class ProductService extends BaseService implements ProductRepository<Produit>  {
     public ProduitService(){

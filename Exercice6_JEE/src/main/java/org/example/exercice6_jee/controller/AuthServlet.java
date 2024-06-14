@@ -7,18 +7,24 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import org.example.exercice6.model.User;
-import org.example.exercice6.service.UserService;
+import org.example.exercice6_jee.model.Product;
+import org.example.exercice6_jee.model.User;
+import org.example.exercice6_jee.service.ProductService;
+import org.example.exercice6_jee.service.UserService;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.List;
 
-@WebServlet(name = "UserServlet", urlPatterns = {"/user", "/register", "/login"})
-public class UserServlet extends HttpServlet {
+@WebServlet(name = "AuthServlet", urlPatterns = {"/auth", "/addProduct", "/listProducts"})
+public class AuthServlet extends HttpServlet {
     private UserService userService;
+    private ProductService productService;
 
     @Override
     public void init() throws ServletException {
         userService = new UserService();
+        productService = new ProductService();
     }
 
     @Override
@@ -32,6 +38,12 @@ public class UserServlet extends HttpServlet {
                     break;
                 case "/login":
                     showLoginForm(req, resp);
+                    break;
+                case "/addProduct":
+                    showAddProductForm(req, resp);
+                    break;
+                case "/listProducts":
+                    listProducts(req, resp);
                     break;
                 default:
                     showLoginForm(req, resp);
@@ -54,6 +66,9 @@ public class UserServlet extends HttpServlet {
                 case "/login":
                     login(req, resp);
                     break;
+                case "/addProduct":
+                    addProduct(req, resp);
+                    break;
                 default:
                     showLoginForm(req, resp);
                     break;
@@ -64,12 +79,25 @@ public class UserServlet extends HttpServlet {
     }
 
     private void showLoginForm(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/users/logForm.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/auth/authForm.jsp");
         dispatcher.forward(req, resp);
     }
 
     private void showRegisterForm(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/users/registerForm.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/auth/authForm.jsp");
+        dispatcher.forward(req, resp);
+    }
+
+    private void showAddProductForm(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setAttribute("mode", "add");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/products/productForm.jsp");
+        dispatcher.forward(req, resp);
+    }
+
+    private void listProducts(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        List<Product> productList = productService.getAllProducts();
+        req.setAttribute("products", productList);
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/products/listProducts.jsp");
         dispatcher.forward(req, resp);
     }
 
@@ -79,15 +107,12 @@ public class UserServlet extends HttpServlet {
         String password = req.getParameter("password");
 
         User user = new User(name, email, password);
-        boolean userCreated = userService.create(user);
-
-        if (userCreated) {
+        if (userService.create(user)) {
             HttpSession session = req.getSession();
             session.setAttribute("isLogged", true);
-            session.setAttribute("user", user);
-            resp.sendRedirect("products");
+            resp.sendRedirect("listProducts");
         } else {
-            resp.sendRedirect("register");
+            resp.sendRedirect("auth?mode=register");
         }
     }
 
@@ -96,14 +121,25 @@ public class UserServlet extends HttpServlet {
         String password = req.getParameter("password");
 
         User user = userService.findByEmailAndPassword(email, password);
-
         if (user != null) {
             HttpSession session = req.getSession();
             session.setAttribute("isLogged", true);
-            session.setAttribute("user", user);
-            resp.sendRedirect("products");
+            resp.sendRedirect("listProducts");
         } else {
-            resp.sendRedirect("login");
+            resp.sendRedirect("auth?mode=login");
         }
     }
+
+    private void addProduct(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String brand = req.getParameter("brand");
+        String reference = req.getParameter("reference");
+        LocalDate purchaseDate = LocalDate.parse(req.getParameter("purchaseDate"));
+        double price = Double.parseDouble(req.getParameter("price"));
+        int stock = Integer.parseInt(req.getParameter("stock"));
+
+        Product product = new Product(brand, reference, purchaseDate, price, stock);
+        productService.createProduct(product);
+        resp.sendRedirect("listProducts");
+    }
 }
+

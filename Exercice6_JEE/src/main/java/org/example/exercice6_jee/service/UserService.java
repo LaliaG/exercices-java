@@ -2,14 +2,21 @@ package org.example.exercice6_jee.service;
 
 import org.example.exercice6_jee.model.User;
 import org.example.exercice6_jee.repository.Repository;
+import org.example.exercice6_jee.repository.UserRepository;
+
 
 import java.util.List;
 //o == entity == user == u
 
 public class UserService extends BaseService implements Repository<User> {
+    private UserRepository userRepository;
     public UserService(){
         super();
     }
+   /* public UserService(){
+
+       userRepository = new UserRepository();
+    }*/
 
     @Override
     public boolean create(User o) {
@@ -42,5 +49,9 @@ public class UserService extends BaseService implements Repository<User> {
     @Override
     public List<User> findAll() {
         return null;
+    }
+
+    public User findByEmailAndPassword(String email, String password) {
+        return userRepository.findByEmailAndPassword(email, password);
     }
 }

@@ -14,6 +14,10 @@ public class UserRepository extends Repository<User> {
         this.sessionFactory = sessionFactory;
     }
 
+    public static User findByEmailAndPassword(String email, String password) {
+        return null;
+    }
+
     public void save(User user) {
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();

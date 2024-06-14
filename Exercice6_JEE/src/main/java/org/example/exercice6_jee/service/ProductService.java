@@ -2,6 +2,7 @@ package org.example.exercice6_jee.service;
 
 import org.example.exercice6_jee.model.Product;
 import org.example.exercice6_jee.repository.Repository;
+import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import java.util.List;
@@ -12,86 +13,95 @@ public class ProductService extends BaseService implements Repository<Product> {
     }
 
     @Override
-    public boolean create(Product o) {
-        session = sessionFactory.openSession();
-        session.beginTransaction();
-        session.save(o);
-        session.getTransaction().commit();
-        session.close();
-        return true;
+    public boolean create(Product product) {
+        Transaction transaction = null;
+        try {
+            sessionFactory.openSession();
+            transaction = session.beginTransaction();
+            session.save(product);
+            transaction.commit();
+            return true;
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+            return false;
+        } finally {
+            closeSession();
+        }
+    }
+
+    private void closeSession() {
+
     }
 
     @Override
-    public boolean update(Product o) {
-        session = sessionFactory.openSession();
-        session.beginTransaction();
-        session.update(o);
-        session.getTransaction().commit();
-        session.close();
-        return true;
+    public boolean update(Product product) {
+        Transaction transaction = null;
+        try {
+            sessionFactory.openSession();
+            transaction = session.beginTransaction();
+            session.update(product);
+            transaction.commit();
+            return true;
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+            return false;
+        } finally {
+            closeSession();
+        }
     }
 
     @Override
-    public boolean delete(Product o) {
-        session = sessionFactory.openSession();
-        session.beginTransaction();
-        session.delete(o);
-        session.getTransaction().commit();
-        session.close();
-        return true;
-    }
-
-    @Override
-    public Product findById(int id) {
-        Product product = null;
-        session = sessionFactory.openSession();
-        product = (Product) session.get(Product.class, id);
-        session.close();
-        return product;
-    }
-
-    @Override
-    public List<Product> findAll() {
-        List<Product> productList = null;
-        session = sessionFactory.openSession();
-        Query<Product> productQuery = session.createQuery("from Product");
-        productList = productQuery.list();
-        session.close();
-        return productList;
-    }
-
-    public void begin(){
-        session = sessionFactory.openSession();
-    }
-
-    public void end(){
-
-        //  session.close();
-        sessionFactory.close();
-    }
-    /*
-    @Override
-    public boolean create(Product o) {
-        return false;
-    }
-
-    @Override
-    public boolean update(Product o) {
-        return false;
-    }
-
-    @Override
-    public boolean delete(Product o) {
-        return false;
+    public boolean delete(Product product) {
+        Transaction transaction = null;
+        try {
+            sessionFactory.openSession();
+            transaction = session.beginTransaction();
+            session.delete(product);
+            transaction.commit();
+            return true;
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+            return false;
+        } finally {
+            closeSession();
+        }
     }
 
     @Override
     public Product findById(int id) {
-        return null;
+        try {
+            sessionFactory.openSession();
+            return session.get(Product.class, id);
+        } finally {
+            closeSession();
+        }
     }
 
     @Override
     public List<Product> findAll() {
+        try {
+            sessionFactory.openSession();
+            Query<Product> query = session.createQuery("from Product", Product.class);
+            return query.list();
+        } finally {
+            closeSession();
+        }
+    }
+
+
+    public List<Product> getAllProducts() {
         return null;
-    }*/
+    }
+
+    public void createProduct(Product product) {
+    }
 }

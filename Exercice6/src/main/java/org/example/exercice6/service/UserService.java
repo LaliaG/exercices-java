@@ -7,6 +7,9 @@ import org.example.exercice6.repository.UserRepository;
 import java.util.List;
 
 public class UserService{
+    public User findByEmailAndPassword(String email, String password) {
+        return UserRepository.findByEmailAndPassword(email, password);
+    }
     /*
     public UserService(){
         super();

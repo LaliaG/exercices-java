@@ -17,6 +17,10 @@ public class ProductServlet extends HttpServlet {
     private ProductService productService;
     private Product product;
 
+    public ProductServlet(Product product) {
+        this.product = product;
+    }
+
     @Override
     public void init() throws ServletException {
         productService = new ProductService();
@@ -64,7 +68,7 @@ public class ProductServlet extends HttpServlet {
     }
 
     private void listProducts(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<Product> produitList = productService.findAll();
+        List<Product> productList = productService.findAll();
         req.setAttribute("products", productList);
         req.getRequestDispatcher("/WEB-INF/products/list.jsp").forward(req, resp);
     }
@@ -94,8 +98,8 @@ public class ProductServlet extends HttpServlet {
 
     private void deleteProduct(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int id = Integer.parseInt(req.getParameter("id"));
-        Product produit = productService.findById(id);
-        productService.delete(produit);
+        Product product = productService.findById(id);
+        productService.delete(product);
         resp.sendRedirect(req.getContextPath() + "/products");
     }
 }
