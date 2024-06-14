@@ -22,4 +22,6 @@ public abstract class BaseService {
     public void begin(){
         session = sessionFactory.openSession();
     }
+
+    public abstract boolean delete(int id);
 }

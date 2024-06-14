@@ -25,6 +25,9 @@ public class User {
 
     }
 
+    public User(Long id, String name, String email, String password) {
+    }
+
     public String getName() {
         return name;
     }
@@ -53,8 +56,8 @@ public class User {
         this.id = id;
     }
 
-    public Long getId() {
-        return id;
+    public User getId() {
+        return user;
     }
 
     @Override

@@ -61,6 +61,11 @@ public class UserRepository implements Repository<User>{
     }
 
     @Override
+    public boolean delete(int id) {
+        return false;
+    }
+
+    @Override
     public User findById(int id) {
         try (Session session = sessionFactory.openSession()) {
             return session.get(User.class, id);

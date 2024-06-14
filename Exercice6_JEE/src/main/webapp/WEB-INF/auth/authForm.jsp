@@ -40,6 +40,9 @@
     <button class="btn btn-link" onclick="window.location.href='authForm.jsp?mode=<%= mode.equals("login") ? "signup" : "login" %>'">
         <%= mode.equals("login") ? "Sign Up" : "Login" %>
     </button>
+    <% if (session.getAttribute("isLogged") != null && (Boolean) session.getAttribute("isLogged")) { %>
+    <button class="btn btn-link" onclick="window.location.href='editUser'">Edit Profile</button>
+    <% } %>
     <% if (request.getAttribute("error") != null) { %>
     <div class="alert alert-danger mt-3">
         <%= request.getAttribute("error") %>

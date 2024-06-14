@@ -29,13 +29,20 @@ public class UserService extends BaseService implements Repository<User> {
     }
 
     @Override
-    public boolean update(User o) {
-        return false;
+    public boolean update(User user) {
+        return userRepository.update(user);
     }
 
     @Override
     public boolean delete(User o) {
         return false;
+    }
+
+
+    @Override
+    public boolean delete(int id) {
+        User user = findById(id);
+        return user != null && userRepository.delete(user);
     }
 
     @Override

@@ -9,6 +9,8 @@ public interface Repository<T> {
 
     boolean delete(T o);
 
+    boolean delete(int id);
+
     T findById(int id);
 
     List<T> findAll();
