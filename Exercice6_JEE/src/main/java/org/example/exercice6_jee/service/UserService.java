@@ -19,10 +19,10 @@ public class UserService extends BaseService implements Repository<User> {
     }*/
 
     @Override
-    public boolean create(User o) {
+    public boolean create(User user) {
         session = sessionFactory.openSession();
         session.beginTransaction();
-        session.save(o);
+        session.save(user);
         session.getTransaction().commit();
         session.close();
         return true;
@@ -34,8 +34,8 @@ public class UserService extends BaseService implements Repository<User> {
     }
 
     @Override
-    public boolean delete(User o) {
-        return false;
+    public boolean delete(User user) {
+        return user != null && userRepository.delete(user);
     }
 
 
@@ -50,12 +50,12 @@ public class UserService extends BaseService implements Repository<User> {
         session = sessionFactory.openSession();
         User o = session.get(User.class, id);
         session.close();
-        return o;
+        return userRepository.findById(id);
     }
 
     @Override
     public List<User> findAll() {
-        return null;
+        return userRepository.findAll();
     }
 
     public User findByEmailAndPassword(String email, String password) {
