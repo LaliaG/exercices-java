@@ -25,7 +25,10 @@ public class User {
 
     }
 
-   // public User(Long id, String name, String email, String password) {
+    public User(Long id, String name, String email, String password) {
+    }
+
+    // public User(Long id, String name, String email, String password) {
    // }
 
     //public User(Long id, String name, String email, String password) {

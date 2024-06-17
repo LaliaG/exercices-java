@@ -81,7 +81,8 @@ public class ProductServlet extends HttpServlet {
         String brand = request.getParameter("brand");
         String reference = request.getParameter("reference");
         LocalDate purchaseDate = LocalDate.parse(request.getParameter("purchaseDate"));
-        double price = Double.valueOf(request.getParameter("price"));
+        double price = Double.parseDouble(
+                request.getParameter("price"));
         int stock = Integer.parseInt(request.getParameter("stock"));
 
         Product produit = new Product(brand, reference, purchaseDate, price, stock);

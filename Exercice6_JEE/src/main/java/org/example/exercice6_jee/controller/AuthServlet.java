@@ -169,12 +169,12 @@ public class AuthServlet extends HttpServlet {
     }
 
     private void updateUser(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int id = Integer.parseInt(req.getParameter("id"));
+        int id = (int) Integer.parseInt(req.getParameter("id"));
         String name = req.getParameter("name");
         String email = req.getParameter("email");
         String password = req.getParameter("password");
 
-        User user = new User( name, email, password);
+        User user = new User((long) id, name, email, password);
         if (userService.update(user)) {
             HttpSession session = req.getSession();
             session.setAttribute("user", user);
