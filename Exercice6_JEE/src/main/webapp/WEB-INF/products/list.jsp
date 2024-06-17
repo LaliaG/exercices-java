@@ -15,6 +15,7 @@
 <body>
 <main class="container">
     <div class="row my-3">
+
         <div class="col-8 offset-2 rounded text-bg-dark p-3">
             <h1 class="fw-light">- Products List -</h1>
             <hr>

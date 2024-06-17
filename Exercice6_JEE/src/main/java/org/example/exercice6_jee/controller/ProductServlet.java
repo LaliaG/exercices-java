@@ -20,6 +20,9 @@ public class ProductServlet extends HttpServlet {
     public ProductServlet(Product product) {
         this.product = product;
     }
+    public ProductServlet() {
+    }
+
 
     @Override
     public void init() throws ServletException {
