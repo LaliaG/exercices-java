@@ -15,7 +15,7 @@ public interface Repository<T> {
 
     T findById(int id);
 
-    User findById(int id);
+   // User findById(int id);deux déclarations de méthode findById avec des types de retour différents (User et T), ce qui peut provoquer des conflits de type.
 
     List<T> findAll();
 

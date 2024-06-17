@@ -54,6 +54,11 @@ public class ProductRepository implements Repository<Product> {
     }
 
     @Override
+    public boolean delete(int id) {
+        return false;
+    }
+
+    @Override
     public Product findById(int id) {
         try (Session session = sessionFactory.openSession()) {
             return session.get(Product.class, id);

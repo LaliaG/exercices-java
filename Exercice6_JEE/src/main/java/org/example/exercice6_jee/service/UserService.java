@@ -48,9 +48,9 @@ public class UserService extends BaseService implements Repository<User> {
     @Override
     public User findById(int id) {
         session = sessionFactory.openSession();
-        User o = session.get(User.class, id);
+        User user = session.get(User.class, id);
         session.close();
-        return userRepository.findById(id);
+        return user;
     }
 
     @Override

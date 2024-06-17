@@ -60,10 +60,10 @@ public class UserRepository implements Repository<User>{
         }
     }
 
-    @Override
-    public boolean delete(int id) {
-        return false;
-    }
+    //@Override
+    //public boolean delete(int id) {
+        //return false;
+    //}
 
     @Override
     public User findById(int id) {
@@ -87,5 +87,11 @@ public class UserRepository implements Repository<User>{
                     .setParameter("password", password)
                     .uniqueResult();
         }
+    }
+
+    @Override
+    public boolean delete(int id) {
+        User user = findById(id);
+        return user != null && delete(user);
     }
 }

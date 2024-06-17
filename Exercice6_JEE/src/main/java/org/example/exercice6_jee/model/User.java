@@ -25,7 +25,18 @@ public class User {
 
     }
 
-    public User(Long id, String name, String email, String password) {
+   // public User(Long id, String name, String email, String password) {
+   // }
+
+    //public User(Long id, String name, String email, String password) {
+   // }
+
+    public int getId() {
+        return Math.toIntExact(id);
+    }
+
+    public void setId(int id) {
+        this.id = (long) id;
     }
 
     public String getName() {
@@ -52,13 +63,7 @@ public class User {
         this.password = password;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
-    public User getId() {
-        return user;
-    }
 
     @Override
     public String toString() {
@@ -70,7 +75,4 @@ public class User {
                 '}';
     }
 
-    public boolean create(User user) {
-        return false;
-    }
 }

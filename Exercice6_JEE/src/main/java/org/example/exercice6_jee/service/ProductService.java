@@ -12,6 +12,7 @@ public class ProductService extends BaseService implements Repository<Product> {
         super();
     }
 
+
     @Override
     public boolean create(Product product) {
         Transaction transaction = null;
@@ -32,9 +33,6 @@ public class ProductService extends BaseService implements Repository<Product> {
         }
     }
 
-    private void closeSession() {
-
-    }
 
     @Override
     public boolean update(Product product) {
@@ -97,9 +95,21 @@ public class ProductService extends BaseService implements Repository<Product> {
         }
     }
 
+    @Override
+    public boolean delete(int id) {
+        Product product = findById(id);
+        return product != null && delete(product);
+    }
+
+    private void closeSession() {
+        if (session != null) {
+            session.close();
+        }
+    }
 
     public List<Product> getAllProducts() {
-        return null;
+        List<Product> product = null;
+        return product;
     }
 
     public void createProduct(Product product) {
