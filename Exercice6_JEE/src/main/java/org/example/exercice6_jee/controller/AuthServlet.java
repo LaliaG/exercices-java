@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 
-@WebServlet(name = "AuthServlet", urlPatterns = {"/auth", "/addProduct", "/listProducts", "/updateUser", "/deleteUser", "/editUser"})
+@WebServlet(name = "AuthServlet", urlPatterns = {"/auth/*", "/addProduct", "/listProducts", "/updateUser", "/deleteUser", "/editUser"})
 public class AuthServlet extends HttpServlet {
     private UserService userService;
     private ProductService productService;

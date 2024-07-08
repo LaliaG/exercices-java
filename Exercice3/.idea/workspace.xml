@@ -5,7 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c79a2b50-27b4-444e-9df2-576b6f07b1e4" name="Changes" comment="exo3">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Exercice6_JEE/src/main/java/org/example/exercice6_jee/controller/AuthServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Exercice6_JEE/src/main/java/org/example/exercice6_jee/controller/AuthServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Exercice6_JEE/src/main/resources/hibernate.cfg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Exercice6_JEE/src/main/resources/hibernate.cfg.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,10 +30,10 @@
       </MavenGeneralSettings>
     </option>
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 2
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 2
+}</component>
   <component name="ProjectId" id="2hjoSFSKL3RxAgg6uq7Fe8pbZnI" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -100,6 +101,7 @@
       <updated>1718095596731</updated>
       <workItem from="1718095597969" duration="5743000" />
       <workItem from="1718116850594" duration="599000" />
+      <workItem from="1719303910347" duration="60000" />
     </task>
     <task id="LOCAL-00001" summary="exo3">
       <option name="closed" value="true" />
