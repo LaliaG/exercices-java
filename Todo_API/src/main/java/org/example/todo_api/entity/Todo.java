@@ -6,6 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 @Entity
 public class Todo {
@@ -18,4 +19,9 @@ public class Todo {
     private LocalDate date;
     private boolean isValidate;
 
+    public void setDueDate(Date dueDate) {
+    }
+
+    public void setTask(String task) {
+    }
 }
