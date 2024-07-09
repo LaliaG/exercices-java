@@ -16,5 +16,5 @@ public class FilmDtoPost {
     private String description;
     private int  duration;
     private String genre;
-    private Long realisateurId;
+    private Long directorId;
 }

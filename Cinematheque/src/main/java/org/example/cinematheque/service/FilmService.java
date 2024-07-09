@@ -5,6 +5,7 @@ import org.example.cinematheque.dto.FilmDtoGet;
 import org.example.cinematheque.dto.FilmDtoPost;
 import org.example.cinematheque.entity.Director;
 import org.example.cinematheque.entity.Film;
+import org.example.cinematheque.exception.NotFoundException;
 import org.example.cinematheque.repository.DirectorRepository;
 import org.example.cinematheque.repository.FilmRepository;
 import org.springframework.beans.factory.annotation.Autowired;
