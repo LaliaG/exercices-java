@@ -30,7 +30,7 @@ public class TodoService {
     }
 
     public List<Todo> getTodosByValidation(boolean isValidate) {
-        return todoRepository.findByIsValidate(isValidate);
+        return todoRepository.findByValidate(validate);
     }
 
     public Todo save(Todo todo) {
